@@ -6,15 +6,24 @@ mixin HomeViewMixin on State<HomeView> {
   late final HomeViewModel _homeViewModel;
 
   HomeViewModel get homeViewModel => _homeViewModel;
+  bool get homeViewModelIsLoading => _homeViewModel.isLoading;
   @override
   void initState() {
     _homeViewModel = HomeViewModel();
+
+    // if (_homeViewModel.isWebSocketInitialized) {
+    //   _homeViewModel.channel!.stream.listen((event) {
+    //     _homeViewModel.messagesList.add(event);
+    //   });
+    // }
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    if (_homeViewModel.isWebSocketInitialized) {
+      _homeViewModel.channel!.sink.close();
+    }
     super.dispose();
   }
 }

@@ -25,21 +25,50 @@ class _HomeViewState extends State<HomeView> with HomeViewMixin {
           children: [
             Center(child: Text(AppEnvironmentValues.baseUrl.value)),
             //
-            BlocListener<HomeViewModel, AppState>(
-              listener: (context, state) {
-                if (state.isLoading) {
-                  print('connected');
+            BlocBuilder<HomeViewModel, AppState>(
+              builder: (context, state) {
+                return ElevatedButton(
+                    onPressed: () {
+                      if (!homeViewModel.isWebSocketInitialized) {
+                        homeViewModel.connectToSocket("1");
+                        homeViewModel.changeLoading();
+                      }
+                    },
+                    child: Text(homeViewModelIsLoading == true
+                        ? 'connected'
+                        : 'Room 1'));
+              },
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  if (homeViewModel.isWebSocketInitialized) {
+                    homeViewModel.sendMessage('deneme');
+                    // messages.add("deneme");
+                  }
+                },
+                child: const Text('Testing')),
+
+            BlocBuilder<HomeViewModel, AppState>(
+              builder: (context, state) {
+                if (state.messagesListState != null) {
+                  return Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.messagesListState!.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(state.messagesListState![index]),
+                        );
+                      },
+                    ),
+                  );
                 } else {
-                  print('none');
+                  return const Center(
+                    child: SizedBox(),
+                  );
                 }
               },
-              child: ElevatedButton(
-                  onPressed: () {
-                    homeViewModel.connectToSocket("1");
-                  },
-                  child: const Text('connect')),
             ),
-            ElevatedButton(onPressed: () {}, child: const Text('Testing'))
           ],
         ),
       ),
