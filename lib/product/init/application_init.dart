@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:gen/gen.dart';
 import 'package:logger/logger.dart';
 import 'package:realtime_chat_app/product/init/config/app_config.dart';
+import 'package:realtime_chat_app/product/state/container/app_container.dart';
 
 @immutable
 
@@ -38,5 +39,7 @@ final class ApplicationInitialize {
 
   void _installApplicationEnv() {
     AppEnvironmentConfig.install(config: AppEnv());
+    // AppContainer.
+    AppContainer.setup();
   }
 }

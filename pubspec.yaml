@@ -13,7 +13,11 @@ dependencies:
     sdk: flutter
 
   # Core
-  socket_io_client: ^2.0.3+1
+  web_socket_channel: ^2.1.0
+  get_it: ^7.6.4
+
+  # Network
+  dio: ^5.3.3
 
   #Localization
   easy_localization: ^3.0.3
