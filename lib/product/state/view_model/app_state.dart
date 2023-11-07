@@ -1,19 +1,19 @@
 import 'package:equatable/equatable.dart';
 
 final class AppState extends Equatable {
-  const AppState({this.message = '', this.isLoading = false});
+  const AppState({this.messagesListState, this.isLoading = false});
 
-  final String message;
+  final List<String>? messagesListState;
   final bool isLoading;
   @override
-  List<Object> get props => [message, isLoading];
+  List<Object> get props => [messagesListState ?? '', isLoading];
 
   AppState copyWith({
-    String? message,
+    List<String>? messagesListState,
     bool? isLoading,
   }) {
     return AppState(
-      message: message ?? this.message,
+      messagesListState: messagesListState ?? messagesListState,
       isLoading: isLoading ?? this.isLoading,
     );
   }
