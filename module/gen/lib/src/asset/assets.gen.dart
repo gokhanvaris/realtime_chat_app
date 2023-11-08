@@ -22,12 +22,11 @@ class $AssetsColorGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/img_flags.png
-  AssetGenImage get imgFlags =>
-      const AssetGenImage('assets/images/img_flags.png');
+  /// File path: assets/images/chat.png
+  AssetGenImage get chat => const AssetGenImage('assets/images/chat.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [imgFlags];
+  List<AssetGenImage> get values => [chat];
 }
 
 class Assets {

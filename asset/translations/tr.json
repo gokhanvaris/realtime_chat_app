@@ -1,16 +1,6 @@
 {
-    "home": {
-        "title": "Home Page"
-    },
-    "general": {
-        "button": {
-            "save": "Save {}"
-        },
-        "dialog": {
-            "version": {
-                "title": "Version",
-                "content": "Version info"
-            }
-        }
-    }
+    "title": "Anasayfa",
+    "room": "Oda",
+    "username": "Kullanıcı adı",
+    "send": "Gönder"
 }

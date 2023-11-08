@@ -5,14 +5,18 @@ import 'dart:async';
 import 'package:realtime_chat_app/product/init/config/app_config.dart';
 import 'package:realtime_chat_app/product/state/base/base_cubit.dart';
 import 'package:realtime_chat_app/product/state/view_model/app_state.dart';
+import 'package:realtime_chat_app/product/utility/enums/project_enums.dart';
 import 'package:web_socket_channel/io.dart';
 
 final class HomeViewModel extends BaseCubit<AppState> {
   HomeViewModel() : super(const AppState(isLoading: false));
   late final IOWebSocketChannel? channel;
   bool isWebSocketInitialized = false;
-  List<String> messagesList = [];
+  List<String> messagesListForRoom1 = [];
+  List<String> messagesListForRoom2 = [];
+
   bool isLoading = false;
+  RoomType? roomType;
 
   /// Change loading state
   void changeLoading() {
@@ -21,7 +25,7 @@ final class HomeViewModel extends BaseCubit<AppState> {
   }
 
   /// Socket connection
-  Future<void> connectToSocket(String channelId) async {
+  Future<void> connectToSocket(String channelId, RoomType roomType) async {
     String personalChatId =
         '${AppEnvironmentValues.baseUrl.value}$channelId/${AppEnvironmentValues.apiKey.value}/';
     try {
@@ -31,7 +35,7 @@ final class HomeViewModel extends BaseCubit<AppState> {
       if (channel != null) {
         StreamSubscription<dynamic> subscription;
         subscription = channel!.stream.listen((message) {
-          _handleMessage(message);
+          _handleMessage(message, roomType);
         });
       }
 
@@ -44,18 +48,35 @@ final class HomeViewModel extends BaseCubit<AppState> {
   }
 
   /// listen socket method
-  void _handleMessage(String message) {
-    messagesList.add("From: $message");
+  void _handleMessage(String message, RoomType roomType) {
+    if (roomType == RoomType.ROOM_ONE) {
+      messagesListForRoom1.add("From: $message");
+    } else {
+      messagesListForRoom2.add("From: $message");
+    }
 
-    emit(state.copyWith(messagesListState: List<String>.from(messagesList)));
+    emit(state.copyWith(
+        messagesListState: roomType == RoomType.ROOM_ONE
+            ? List<String>.from(messagesListForRoom1)
+            : List<String>.from(messagesListForRoom2)));
   }
 
   /// send message method
-  void sendMessage(String message) {
+  void sendMessage(
+      {String? message = "",
+      required String username,
+      required RoomType roomType}) {
     if (isWebSocketInitialized) {
-      channel!.sink.add("You: $message");
-      messagesList.add("You: $message");
-      emit(state.copyWith(messagesListState: List<String>.from(messagesList)));
+      channel!.sink.add("$username: $message");
+      if (roomType == RoomType.ROOM_ONE) {
+        messagesListForRoom1.add("$username: $message");
+      } else {
+        messagesListForRoom2.add("$username: $message");
+      }
+      emit(state.copyWith(
+          messagesListState: roomType == RoomType.ROOM_ONE
+              ? List<String>.from(messagesListForRoom1)
+              : List<String>.from(messagesListForRoom2)));
     }
   }
 }
