@@ -9,7 +9,9 @@ It is a real-time chat application developed with Flutter over websocket.
 <h2> Features </h2>
  
  - WebSocket
-   
+   <ul>
+  <li><a href="https://socketsbay.com/" title="Website">WebSocket (Socketsbay)</a>
+  </ul>
 <h2> Getting Started </h2>
 
 <ul>
@@ -22,9 +24,7 @@ It is a real-time chat application developed with Flutter over websocket.
   ```
     flutter pub run build_runner build
   ```
-  <ul>
-  <li><a href="https://socketsbay.com/" title="Website">WebSocket (Socketsbay)</a>
-  </ul>
+  
 </ul>
 
 
