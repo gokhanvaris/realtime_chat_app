@@ -35,7 +35,7 @@ final class HomeViewModel extends BaseCubit<AppState> {
       if (channel != null) {
         StreamSubscription<dynamic> subscription;
         subscription = channel!.stream.listen((message) {
-          _handleMessage(message, roomType);
+          handleMessage(message, roomType);
         });
       }
 
@@ -48,7 +48,7 @@ final class HomeViewModel extends BaseCubit<AppState> {
   }
 
   /// listen socket method
-  void _handleMessage(String message, RoomType roomType) {
+  void handleMessage(String message, RoomType roomType) {
     if (roomType == RoomType.ROOM_ONE) {
       messagesListForRoom1.add("From: $message");
     } else {
