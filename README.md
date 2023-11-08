@@ -29,9 +29,6 @@ It is a real-time chat application developed with Flutter over websocket.
 
 
 <h2> Dependencies </h2>
-
-
-  
     <li> <a href="https://pub.dev/packages/flutter_bloc" title="BLoC">flutter_bloc</a>
     <li> <a href="https://pub.dev/packages/get_it" title="get_it">get_it</a>
     <li>  <a href="https://pub.dev/packages/easy_localization">easy_localization</a>
