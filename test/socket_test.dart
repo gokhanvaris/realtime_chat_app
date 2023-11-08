@@ -25,4 +25,17 @@ void main() {
 
     expect(homeViewModel.messagesListForRoom1.isNotEmpty, true);
   });
+  test('receive message from socket', () async {
+    homeViewModel.connectToSocket("1", RoomType.ROOM_ONE);
+
+    homeViewModel.sendMessage(
+      message: 'Test message',
+      roomType: RoomType.ROOM_ONE,
+      username: 'Tester',
+    );
+
+    var receivedMessage = await homeViewModel.channel?.stream.first;
+
+    expect(receivedMessage, 'test');
+  });
 }
