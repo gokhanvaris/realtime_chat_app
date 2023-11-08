@@ -33,8 +33,7 @@ final class HomeViewModel extends BaseCubit<AppState> {
         personalChatId,
       );
       if (channel != null) {
-        StreamSubscription<dynamic> subscription;
-        subscription = channel!.stream.listen((message) {
+        channel!.stream.listen((message) {
           handleMessage(message, roomType);
         });
       }
