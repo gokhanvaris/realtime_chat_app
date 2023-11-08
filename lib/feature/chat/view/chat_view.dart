@@ -67,8 +67,8 @@ class _ChatViewState extends State<ChatView> with ChatViewMixin {
                       onPressed: () {
                         if (_textEditingController?.text != "") {
                           homeViewModel.sendMessage(
-                              message: _textEditingController?.text,
                               roomType: widget.roomType,
+                              message: _textEditingController?.text,
                               username: widget.userName);
                           _textEditingController?.text = "";
                         }
