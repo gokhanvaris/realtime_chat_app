@@ -11,7 +11,6 @@ mixin LoadingMixin<T extends StatefulWidget> on State<T> {
   ValueNotifier<bool> get isLoadingNotifier => _isLoadingNotifier;
 
   /// Change loading state
-  /// If user want to force, give a bool value
   void changeLoading({bool? isLoading}) {
     if (isLoading != null) _isLoadingNotifier.value = isLoading;
 
