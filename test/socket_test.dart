@@ -15,4 +15,14 @@ void main() {
 
     expect(homeViewModel.isWebSocketInitialized, true);
   });
+  test('send message to socket', () async {
+    homeViewModel.connectToSocket("1", RoomType.ROOM_ONE);
+    homeViewModel.sendMessage(
+      message: 'Test message',
+      roomType: RoomType.ROOM_ONE,
+      username: 'Tester',
+    );
+
+    expect(homeViewModel.messagesListForRoom1.isNotEmpty, true);
+  });
 }
