@@ -43,7 +43,6 @@ class _HomeViewState extends State<HomeView> with HomeViewMixin {
                 onPressed: () {
                   if (homeViewModel.isWebSocketInitialized) {
                     homeViewModel.sendMessage('deneme');
-                    // messages.add("deneme");
                   }
                 },
                 child: const Text('Testing')),
