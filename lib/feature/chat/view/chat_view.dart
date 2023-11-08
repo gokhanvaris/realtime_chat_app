@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gen/gen.dart';
 import 'package:realtime_chat_app/feature/chat/view/mixin/chat_view_mixin.dart';
+import 'package:realtime_chat_app/feature/home/view_model/home_view_model.dart';
 import 'package:realtime_chat_app/product/init/language/locale_keys.g.dart';
+import 'package:realtime_chat_app/product/state/view_model/app_state.dart';
 import 'package:realtime_chat_app/product/utility/enums/project_enums.dart';
 
 @RoutePage()
@@ -80,9 +82,31 @@ class _ChatViewState extends State<ChatView> with ChatViewMixin {
             ),
           ),
         ),
-        body: const Center(
+        body: Center(
           child: Column(
-            children: [],
+            children: [
+              BlocBuilder<HomeViewModel, AppState>(
+                builder: (context, state) {
+                  if (state.messagesListState != null) {
+                    return Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.messagesListState!.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(state.messagesListState![index]),
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: SizedBox(),
+                    );
+                  }
+                },
+              ),
+            ],
           ),
         ),
       ),
