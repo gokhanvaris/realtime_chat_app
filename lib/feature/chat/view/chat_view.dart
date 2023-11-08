@@ -52,33 +52,37 @@ class _ChatViewState extends State<ChatView> with ChatViewMixin {
           color: Colors.grey,
           child: Row(
             children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.only(left: 22),
-                  child: TextFormField(
-                    onChanged: (val) {
-                      if (val.isNotEmpty) {
-                        textEditingController?.text = val;
-                      } else {
-                        textEditingController = null;
-                      }
-                      setState(() {});
-                    },
-                    controller: textEditingController,
-                    decoration: const InputDecoration(
-                      hintText: LocaleKeys.username,
-                      border: InputBorder.none,
-                      fillColor: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
+              buildTextFormField(),
               BuildChatButton(
                 textEditingController: textEditingController,
                 homeViewModel: homeViewModel,
                 widget: widget,
               )
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Expanded buildTextFormField() {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.only(left: 22),
+        child: TextFormField(
+          onChanged: (val) {
+            if (val.isNotEmpty) {
+              textEditingController?.text = val;
+            } else {
+              textEditingController = null;
+            }
+            setState(() {});
+          },
+          controller: textEditingController,
+          decoration: const InputDecoration(
+            hintText: LocaleKeys.username,
+            border: InputBorder.none,
+            fillColor: Colors.white,
           ),
         ),
       ),
