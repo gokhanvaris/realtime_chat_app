@@ -43,20 +43,14 @@ final class HomeViewModel extends BaseCubit<AppState> {
     }
   }
 
+  /// listen socket method
   void _handleMessage(String message) {
     messagesList.add("From: $message");
-    // emit(AppState(isLoading: false, messagesListState: messagesList));
+
     emit(state.copyWith(messagesListState: List<String>.from(messagesList)));
   }
 
-  // Stream<dynamic>? getChannelStream() {
-  //   if (isWebSocketInitialized) {
-  //     emit(state.copyWith(message: []));
-  //     return channel!.stream;
-  //   }
-  //   return null;
-  // }
-
+  /// send message method
   void sendMessage(String message) {
     if (isWebSocketInitialized) {
       channel!.sink.add("You: $message");

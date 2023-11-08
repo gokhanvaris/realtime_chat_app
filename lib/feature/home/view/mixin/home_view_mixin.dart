@@ -11,11 +11,6 @@ mixin HomeViewMixin on State<HomeView> {
   void initState() {
     _homeViewModel = HomeViewModel();
 
-    // if (_homeViewModel.isWebSocketInitialized) {
-    //   _homeViewModel.channel!.stream.listen((event) {
-    //     _homeViewModel.messagesList.add(event);
-    //   });
-    // }
     super.initState();
   }
 
