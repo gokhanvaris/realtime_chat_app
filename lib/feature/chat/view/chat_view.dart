@@ -80,7 +80,7 @@ class _ChatViewState extends State<ChatView> with ChatViewMixin {
           },
           controller: textEditingController,
           decoration: const InputDecoration(
-            hintText: LocaleKeys.username,
+            hintText: LocaleKeys.message,
             border: InputBorder.none,
             fillColor: Colors.white,
           ),
