@@ -12,8 +12,8 @@ final class HomeViewModel extends BaseCubit<AppState> {
   HomeViewModel() : super(const AppState(isLoading: false));
   late final IOWebSocketChannel? channel;
   bool isWebSocketInitialized = false;
-  List<String> messagesListForRoom1 = [];
-  List<String> messagesListForRoom2 = [];
+  final List<String> messagesListForRoom1 = [];
+  final List<String> messagesListForRoom2 = [];
 
   bool isLoading = false;
   RoomType? roomType;
