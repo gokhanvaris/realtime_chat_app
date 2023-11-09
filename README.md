@@ -37,7 +37,10 @@ It is a real-time chat application developed with Flutter over websocket.
 
       
 
+<h2>Flow Chart</h2>
 
+
+<img width="350" alt="webmobil" src="https://raw.githubusercontent.com/gokhanvaris/realtime_chat_app/main/app_diagram.png">
 
 
 
